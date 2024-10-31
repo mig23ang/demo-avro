@@ -24,4 +24,20 @@ public class ProductosMapperAvro {
     private CategoriaEnum mapCategoriaEnum(CategoriaEnumAvro categoriaAvro) {
         return CategoriaEnum.valueOf(categoriaAvro.name());
     }
+
+    public ProductosAvro toProductosAvro(ProductosEntity productosEntity) {
+        return ProductosAvro.newBuilder()
+                .setId(productosEntity.getId())
+                .setNombre(productosEntity.getNombre())
+                .setFecha(productosEntity.getFecha())
+                .setUnidades(productosEntity.getUnidades())
+                .setCategoria(mapCategoriaEnumA(productosEntity.getCategoria()))
+                .setDisponible(productosEntity.isDisponible())
+                .build();
+    }
+
+    //Metodo de conversión de CategoriaEnum a CategoriaEnumAvro
+    private CategoriaEnumAvro mapCategoriaEnumA(CategoriaEnum categoria) {
+        return CategoriaEnumAvro.valueOf(categoria.name());
+    }
 }
